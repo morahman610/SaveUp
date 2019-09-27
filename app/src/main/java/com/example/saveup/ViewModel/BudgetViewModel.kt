@@ -1,12 +1,30 @@
-package com.example.saveup
+package com.example.saveup.ViewModel
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.example.saveup.Model.Budget_Entity
+import com.example.saveup.Model.AppDB
+import com.example.saveup.Model.Budget
 import com.example.saveup.Model.BudgetsRepository
 
-class BudgetViewModel(val budgetsRepository: BudgetsRepository) : ViewModel() {
+class BudgetViewModel(application: Application) : AndroidViewModel(application) {
 
-    fun getBudgets() = budgetsRepository.getBudgets()
+    private val repository : BudgetsRepository
+    private val allBudgets : LiveData<List<Budget>>
 
-    fun addPlace(budget : Budget_Entity) = budgetsRepository.insertBudget(budget)
+    init {
+
+        val budgetDAO = AppDB.getDatabase(application).budgetDAO()
+        repository = BudgetsRepository(budgetDAO)
+        allBudgets = repository.getBudgets()
+    }
+
+    fun getBudgets() = repository.getBudgets()
+
+    fun addBudget(budget : Budget) = repository.insertBudget(budget)
+
+    fun updateBudget(budget : Budget) = repository.updateBudget(budget)
+
+    fun deleteBudget(budget: Budget) = repository.deleteBudget(budget)
 }

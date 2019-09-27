@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "category_budget_table")
-class Budget_Entity (
+class Budget (
     private var categoryID : Int,
     private var categoryName :String,
     private var categorySpending : Int,
