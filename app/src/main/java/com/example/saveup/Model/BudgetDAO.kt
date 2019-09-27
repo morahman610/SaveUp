@@ -1,17 +1,19 @@
 package com.example.saveup
 
 import androidx.lifecycle.LiveData
+import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 
-interface CategoryDao {
+@Dao
+interface BudgetDAO {
 
     @Insert
-    fun insert(categoryBudget : Category)
+    fun insert(categoryBudget : Budget_Entity)
 
     @Query("DELETE FROM category_budget_table")
-    fun deleteAllCategories()
+    fun deleteAllBudgets()
 
     @Query("SELECT * FROM category_budget_table")
-    fun getAllCategories() : LiveData<List<Category>>
+    fun getAllBudgets() : LiveData<List<Budget_Entity>>
 }
