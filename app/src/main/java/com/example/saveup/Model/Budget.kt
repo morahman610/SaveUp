@@ -5,10 +5,9 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "category_budget_table")
 class Budget (
-    private var categoryID : Int,
-    private var categoryName :String,
-    private var categorySpending : Int,
-    private var categoryMaxSpending : Int
+    val budgetName :String,
+    val budgetSpending : Int = 0,
+    val budgetMaxSpending : Int
 ) {
     @PrimaryKey(autoGenerate = true)
     var id : Int = 0

@@ -6,17 +6,35 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".MainActivity">
+        tools:context=".Activity.MainActivity"
+        android:gravity="center">
 
-    <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-            android:background="@color/colorPrimary"/>
-    <EditText android:id="@+id/text_field"
+    <Spinner
+            android:id="@+id/budgetDropDown"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@id/numPad"/>
+            android:layout_marginTop="40sp"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ADD"
+            android:onClick="addBudgetIntent"/>
+    <TextView
+            android:id="@+id/testText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="superman"
+            android:textSize="30sp"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@id/text_field"/>
+    <TextView android:id="@+id/text_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/numPad"
+            android:gravity="center"
+            tools:text="50"
+            tools:textSize="70sp"
+            android:layout_marginBottom="70sp"/>
     <RelativeLayout android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
@@ -119,7 +137,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/buttonSubmit"
                 android:layout_below="@id/buttonZero"
-                android:layout_centerHorizontal="true"/>
+                android:layout_centerHorizontal="true"
+                android:onClick="amountSubmitOnClick"/>
     </RelativeLayout>
 
 </RelativeLayout>

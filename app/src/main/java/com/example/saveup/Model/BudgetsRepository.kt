@@ -12,6 +12,7 @@ class BudgetsRepository(private val budgetDAO: BudgetDAO) {
     }
 
     fun getBudgets() : LiveData<List<Budget>> = budgetDAO.getAllBudgets()
+    fun getAllBudgetNames() : LiveData<List<String>> = budgetDAO.getAllBudgetNames()
     fun insertBudget(budget : Budget) = budgetDAO.insertBudget(budget)
     fun deleteBudget(budget: Budget) = budgetDAO.deleteBudget(budget)
     fun deleteAllBudgets() = budgetDAO.deleteAllBudgets()

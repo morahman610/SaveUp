@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Activity.AddNewBudgetActivity"
+        android:orientation="vertical"
+        android:layout_margin="20sp">
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Budget Name"/>
+
+    <EditText
+            android:id="@+id/newBudgetNameTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Budget Max Spending"/>
+
+    <EditText
+            android:id="@+id/newBudgetMaxSpendingTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Budget"
+            android:onClick="addBudget"
+            android:layout_gravity="center"
+            android:layout_marginTop="50sp"
+            style="@style/Widget.AppCompat.Button.Colored"/>
+</LinearLayout>

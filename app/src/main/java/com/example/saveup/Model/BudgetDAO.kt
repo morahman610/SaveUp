@@ -15,6 +15,9 @@ interface BudgetDAO {
     @Query("SELECT * FROM category_budget_table")
     fun getAllBudgets() : LiveData<List<Budget>>
 
+    @Query("SELECT budgetName FROM category_budget_table")
+    fun getAllBudgetNames() : LiveData<List<String>>
+
     @Insert
     fun insertBudget(budget : Budget)
 
