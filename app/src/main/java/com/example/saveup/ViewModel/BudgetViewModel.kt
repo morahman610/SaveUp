@@ -17,6 +17,7 @@ class BudgetViewModel(application: Application) : AndroidViewModel(application) 
     private val coroutineContext: CoroutineContext
         get() = parentJob + Dispatchers.Main
     private val scope = CoroutineScope(coroutineContext)
+    private lateinit var budgetChosen : Budget
 
     private val repository : BudgetsRepository
     private val allBudgets : LiveData<List<Budget>>
@@ -34,7 +35,9 @@ class BudgetViewModel(application: Application) : AndroidViewModel(application) 
 
     fun addBudget(budget : Budget) = scope.launch(Dispatchers.IO) { repository.insertBudget(budget) }
 
-    fun updateBudget(budget : Budget) = repository.updateBudget(budget)
+    fun updateBudget(budget : Budget) = scope.launch(Dispatchers.IO) { repository.updateBudget(budget) }
 
     fun deleteBudget(budget: Budget) = repository.deleteBudget(budget)
+
+    fun getBudget(_budgetName : String) = repository.getBudget(_budgetName)
 }

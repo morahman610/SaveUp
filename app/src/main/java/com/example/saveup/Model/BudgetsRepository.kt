@@ -17,4 +17,5 @@ class BudgetsRepository(private val budgetDAO: BudgetDAO) {
     fun deleteBudget(budget: Budget) = budgetDAO.deleteBudget(budget)
     fun deleteAllBudgets() = budgetDAO.deleteAllBudgets()
     fun updateBudget(budget: Budget) = budgetDAO.updateBudget(budget)
+    fun getBudget(_budgetName : String) = budgetDAO.getBudget(_budgetName)
 }

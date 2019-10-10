@@ -8,10 +8,10 @@ import android.widget.*
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.example.saveup.Adapter.budgetSpinnerAdapter
 import com.example.saveup.Model.Budget
 import com.example.saveup.R
 import com.example.saveup.ViewModel.BudgetViewModel
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,6 +19,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var budgetDropDown : Spinner
     private lateinit var budgetViewModel: BudgetViewModel
     private lateinit var allBudgetNames: LiveData<List<String>>
+    private lateinit var concatinatedText : TextView
+    private lateinit var budgetSelected : Budget
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,11 +32,31 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupUI() {
         budgetDropDown = findViewById(R.id.budgetDropDown)
+        concatinatedText = findViewById(R.id.text_field)
+
+
         budgetViewModel = ViewModelProviders.of(this).get(BudgetViewModel::class.java)
-        budgetViewModel.getAllBudgetNames().observe(this, Observer { budgetNames ->
-            budgetDropDown.adapter = ArrayAdapter<String>(this,
-            R.layout.support_simple_spinner_dropdown_item, budgetNames)
+        budgetViewModel.getBudgets().observe(this, Observer { budgets ->
+            budgetDropDown.adapter = budgetSpinnerAdapter(this,budgets)
+
+            budgetDropDown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    budgetSelected = budgets[position]
+
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
+            }
         })
+
+
     }
 
     fun addBudgetIntent(view: View) {
@@ -45,61 +67,64 @@ class MainActivity : AppCompatActivity() {
 
     fun concatText(view: View) {
 
-        var text : TextView = findViewById(R.id.text_field)
 
         when(view.id) {
             R.id.buttonOne -> {
                 number += "1"
-                text.setText(number)
+                concatinatedText.setText(number)
             }
             R.id.buttonTwo -> {
                 number += "2"
-                text.setText(number)
+                concatinatedText.setText(number)
             }
             R.id.buttonThree -> {
                 number += "3"
-                text.setText(number)
+                concatinatedText.setText(number)
             }
             R.id.buttonFour -> {
                 number += "4"
-                text.setText(number)
+                concatinatedText.setText(number)
             }
             R.id.buttonFive -> {
                 number += "5"
-                text.setText(number)
+                concatinatedText.setText(number)
             }
             R.id.buttonSix -> {
                 number += "6"
-                text.setText(number)
+                concatinatedText.setText(number)
             }
             R.id.buttonSeven -> {
                 number += "7"
-                text.setText(number)
+                concatinatedText.setText(number)
             }
             R.id.buttonEight -> {
                 number += "8"
-                text.setText(number)
+                concatinatedText.setText(number)
             }
             R.id.buttonNine -> {
                 number += "9"
-                text.setText(number)
+                concatinatedText.setText(number)
             }
             R.id.buttonZero -> {
                 number += "Zero"
-                text.setText(number)
+                concatinatedText.setText(number)
             }
             R.id.buttonDecimal -> {
                 number += "."
-                text.setText(number)
+                concatinatedText.setText(number)
             }
             R.id.buttonClear -> {
                 number = ""
-                text.setText(number)
+                concatinatedText.setText(number)
             }
         }
     }
 
     fun amountSubmitOnClick(view: View) {
+        budgetSelected.budgetSpending = concatinatedText.text.toString().toInt()
 
+
+
+        budgetViewModel.updateBudget(budgetSelected)
     }
 }
